@@ -11,7 +11,7 @@ done
 
 # Read server info
 SERVER_IP="192.168.56.110"
-TOKEN=$(cat /vagrant_data/k3s/node-token)
+TOKEN=$(cat /vagrant/k3s/node-token)
 
 # Install K3s agent
 # curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="agent" K3S_URL="https://$SERVER_IP:6443" K3S_TOKEN="$TOKEN" sh -s -
