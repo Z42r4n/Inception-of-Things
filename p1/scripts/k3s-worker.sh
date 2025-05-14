@@ -4,7 +4,7 @@ set -e
 echo "[+] Installing K3s (agent)..."
 
 # Wait for token and IP to appear
-while [ ! -f /vagrant_data/k3s/node-token ]; do
+while [ ! -f /vagrant/k3s/node-token ]; do
     echo "Waiting for master to be ready..."
     sleep 5
 done
