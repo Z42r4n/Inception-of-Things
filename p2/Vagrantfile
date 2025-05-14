@@ -1,0 +1,35 @@
+Vagrant.configure("2") do |config|
+    gui = false
+    memory = 2048
+    cpus = 2
+
+    config.vm.box = "almalinux/9"
+    
+    # master node
+    config.vm.define "ymoutaouS" do |master|
+        master.vm.hostname = "ymoutaouS"
+        master.vm.network "private_network", ip: "192.168.56.110"
+        master.vm.synced_folder ".", "/vagrant_data"
+        master.vm.provider "virtualbox" do |vb|
+          vb.name = "masterNode"
+          vb.gui = gui
+          vb.memory = memory
+          vb.cpus = cpus
+        end
+        master.vm.provision "shell", path: "scripts/k3s-master.sh"
+    end
+
+    # worker node
+    config.vm.define "ymoutaouSW" do |worker|
+        worker.vm.hostname = "ymoutaouSW"
+        worker.vm.network "private_network", ip: "192.168.56.111"
+        worker.vm.synced_folder ".", "/vagrant_data"
+        worker.vm.provider "virtualbox" do |vb|
+          vb.name = "workerNode"
+          vb.gui = gui
+          vb.memory = memory
+          vb.cpus = cpus
+        end
+        worker.vm.provision "shell", path: "scripts/k3s-worker.sh"
+    end
+end
